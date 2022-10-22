@@ -26,9 +26,13 @@ export default function DefeitoPage(props){
             }
         }).then((Carros) => {
             setAllCarros(Carros.data);
-        }).catch(() => {
-            console.log('deu erro')
-        });
+        }).catch(function (error) {
+            
+            if (error.response) {
+              console.log(error.response.data);
+              alert(error.response.data.message);
+            }
+          });
 
     },[])
 
@@ -46,10 +50,13 @@ export default function DefeitoPage(props){
         }).then((cadastro) => {
             setAllCarros([...Carros, cadastro.data])
 
-        }).catch(() => {
-
-            alert('Não foi possivel cadastrar o carro')
-        });
+        }).catch(function (error) {
+            
+            if (error.response) {
+              console.log(error.response.data);
+              alert(error.response.data.message);
+            }
+          });
     }
 
     const excluirCarro = (id) => {
@@ -61,9 +68,13 @@ export default function DefeitoPage(props){
             },
         }).then((Carros) => {
             setAllCarros(Carros.data);
-        }).catch(() => {
-            console.log('deu erro')
-        });
+        }).catch(function (error) {
+            
+            if (error.response) {
+              console.log(error.response.data);
+              alert(error.response.data.message);
+            }
+          });
     }
 
     const updateCarro = (modelo, ano, fabricante, preco, id) => {
@@ -81,10 +92,13 @@ export default function DefeitoPage(props){
         }).then((cadastro) => {
             setAllCarros([...Carros, cadastro.data])
 
-        }).catch(() => {
-
-            alert('Não foi possivel cadastrar o carro')
-        });
+        }).catch(function (error) {
+            
+            if (error.response) {
+              console.log(error.response.data);
+              alert(error.response.data.message);
+            }
+          });
     }
 
     

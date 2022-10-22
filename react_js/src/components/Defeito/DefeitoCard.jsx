@@ -1,10 +1,4 @@
 export default function DefeitoCard(props){
-
-    const excluirDefeito = (id) => {
-
-        // alert('excluir teste');
-    }
-
     return (
         <tr>
             <td>#</td>

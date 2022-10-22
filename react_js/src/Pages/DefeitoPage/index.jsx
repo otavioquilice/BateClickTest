@@ -19,9 +19,13 @@ export default function DefeitoPage(props){
             }
         }).then((Defeitos) => {
             setAllDefeitos(Defeitos.data);
-        }).catch(() => {
-            console.log('deu erro')
-        });
+        }).catch(function (error) {
+            
+            if (error.response) {
+              console.log(error.response.data);
+              alert(error.response.data.message);
+            }
+          });
 
         //Busca todos os Carros na api
         axios.get(`http://127.0.0.1:8000/api/carros`, {
@@ -30,9 +34,13 @@ export default function DefeitoPage(props){
             }
         }).then((Carros) => {
             setAllCarros(Carros.data);
-        }).catch(() => {
-            console.log('deu erro')
-        });
+        }).catch(function (error) {
+            
+            if (error.response) {
+              console.log(error.response.data);
+              alert(error.response.data.message);
+            }
+          });
 
     },[])
 
@@ -48,10 +56,13 @@ export default function DefeitoPage(props){
         }).then((cadastro) => {
             setAllDefeitos([...Defeitos, cadastro.data])
 
-        }).catch(() => {
-
-            alert('Não foi possivel cadastrar o carro')
-        });
+        }).catch(function (error) {
+            
+            if (error.response) {
+              console.log(error.response.data);
+              alert(error.response.data.message);
+            }
+          });
     }
 
     const excluirDefeito = (id) => {
@@ -63,9 +74,13 @@ export default function DefeitoPage(props){
             },
         }).then((Defeitos) => {
             setAllDefeitos(Defeitos.data);
-        }).catch(() => {
-            console.log('deu erro')
-        });
+        }).catch(function (error) {
+            
+            if (error.response) {
+              console.log(error.response.data);
+              alert(error.response.data.message);
+            }
+          });
     }
 
     return(

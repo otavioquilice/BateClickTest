@@ -19,15 +19,16 @@ class CarrosController extends Controller
 
         $request->validate(
             [
-                "ano"              => 'required',
+
                 "modelo"           => 'required',
+                "ano"              => 'required',
                 "fabricante"       => 'required',
                 "preco"            => 'required',
             ],
             [
-                'ano.required'           => "O campo carro é obrigatório",
-                'modelo.required'        => "O campo Defeito é obrigatório",
-                'fabricante.required'    => "O campo Defeito é obrigatório",
+                'modelo.required'        => "O campo Modelo é obrigatório",
+                'ano.required'           => "O campo Ano é obrigatório",
+                'fabricante.required'    => "O campo Fabricante é obrigatório",
                 'preco.required'         => "O campo Preço é obrigatório",
             ]
         );
