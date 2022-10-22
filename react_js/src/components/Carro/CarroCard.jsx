@@ -1,13 +1,22 @@
 export default function CarroCard(props){
-
+    
     return (
         <tr>
-            <td>#</td>
-            <td>{props.modelo}</td>
-            <td>{props.ano}</td>
-            <td>{props.fabricante}</td>
-            <td>------</td>
-            <td>Excluir/Editar</td>
+            <td>{props.carro.id}</td>
+            <td>{props.carro.modelo}</td>
+            <td>{props.carro.ano}</td>
+            <td>{props.carro.fabricante}</td>
+            <td>{props.carro.preco}</td>
+            <td>
+                <button type="button" onClick={(event) => { 
+                    event.preventDefault();
+                    props.preencherEditar(props.carro)
+                }}>Editar</button>/
+                <button type="button" onClick={(event) => { 
+                    event.preventDefault();
+                    props.excluir(props.carro.id)
+                }}>Excluir</button>
+            </td>
         </tr>
     );
 }

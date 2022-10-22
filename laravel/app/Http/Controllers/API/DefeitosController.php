@@ -14,9 +14,13 @@ class DefeitosController extends Controller
         $data = [];
         foreach($defeitos as $defeito){
             $data[] = [
+
+                'id_carro'  => $defeito->carro->id,
                 'id'        => $defeito->id,
-                'carro'     => '',//$defeito->carro->modelo.'/'.$defeito->carro->ano.'/'.$defeito->carro->fabricante,
                 'defeito'   => $defeito->defeito,
+                'modelo'    => $defeito->carro->modelo,
+                'ano'       => $defeito->carro->ano,
+                'fabricante'=> $defeito->carro->fabricante
             ];
         }
         return response($data, 200);
@@ -36,11 +40,24 @@ class DefeitosController extends Controller
             ]
         );
 
-        $data       = $request->all();
+        $data_imput       = $request->all();
+        $defeito    = Defeito::create($data_imput);
 
-        $defeito    = Defeito::create($data);
+        $data = [];
+        if(!empty($defeito) && $defeito->count()){
+            $data = [
 
-        return response($defeito->with('carro'), 200);
+                'id_carro'  => $defeito->id_carro,
+                'id'        => $defeito->id,
+                'defeito'   => $defeito->defeito,
+                'modelo'    => $defeito->carro->modelo,
+                'ano'       => $defeito->carro->ano,
+                'fabricante'=> $defeito->carro->fabricante
+            ];
+        }
+
+        return response($data, 200);
+
 
     }
     

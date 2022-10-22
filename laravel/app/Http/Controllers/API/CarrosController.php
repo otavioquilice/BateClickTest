@@ -22,11 +22,13 @@ class CarrosController extends Controller
                 "ano"              => 'required',
                 "modelo"           => 'required',
                 "fabricante"       => 'required',
+                "preco"            => 'required',
             ],
             [
                 'ano.required'           => "O campo carro é obrigatório",
                 'modelo.required'        => "O campo Defeito é obrigatório",
                 'fabricante.required'    => "O campo Defeito é obrigatório",
+                'preco.required'         => "O campo Preço é obrigatório",
             ]
         );
 
@@ -53,11 +55,13 @@ class CarrosController extends Controller
         if(Carro::destroy($id))
 		{
             Carro::destroy($id);
-			return response()->json(["status" => true], 200);
+            $carros = Carro::all();
+
+            return response($carros, 200);
 		
         }else{
 
-            return response()->json(["status" => true], 400);
+            return response()->json(["status" => false], 400);
         }
 
     }

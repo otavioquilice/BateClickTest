@@ -5,8 +5,7 @@ export default function BotaoCadastrar(props){
 
     return (
         <div className="task-item">
-            <div className="title">{props.title}</div>
-            <button onClick={props.click_btn}>Cadastrar</button>
+            <button onClick={props.click_btn}>{props.title}</button>
         </div>
     );
 }

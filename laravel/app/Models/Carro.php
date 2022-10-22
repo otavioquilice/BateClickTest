@@ -20,6 +20,7 @@ class Carro extends Model
 		"id",
 		"ano",
 		"modelo",
+		'preco',
 		"fabricante"
 	];
 
