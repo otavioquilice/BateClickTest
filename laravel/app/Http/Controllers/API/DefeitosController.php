@@ -15,7 +15,7 @@ class DefeitosController extends Controller
         foreach($defeitos as $defeito){
             $data[] = [
 
-                'id_carro'  => $defeito->carro->id,
+                'id_carro'  => $defeito->id_carro,
                 'id'        => $defeito->id,
                 'defeito'   => $defeito->defeito,
                 'modelo'    => $defeito->carro->modelo,
@@ -77,7 +77,9 @@ class DefeitosController extends Controller
         if(Defeito::destroy($id))
 		{
             Defeito::destroy($id);
-			return response()->json(["status" => true], 200);
+            $defeitos = Defeito::all();
+
+            return response($defeitos, 200);
 		
         }else{
 
