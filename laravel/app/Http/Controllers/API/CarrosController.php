@@ -34,6 +34,10 @@ class CarrosController extends Controller
         );
 
         $data       = $request->all();
+        $verifyCarro = Carro::where('modelo', $request->modelo)->where('ano', $request->ano)->where('fabricante', $request->fabricante)->get();
+        if(!empty($verifyCarro) && count($verifyCarro)){
+            return response($content = 'Carro já cadstrado!', $status = 401);
+        }
 
         $carro    = Carro::create($data);
 
