@@ -51,7 +51,7 @@ export default function CarroCadastro(props){
                         event.preventDefault();
                         props.updateCarro(modelo, ano, fabricante, preco, id)
                     } 
-                } value="Editar" />
+                } value="Confirmar Edição" />
             </form>
             <br></br>
             <br></br>

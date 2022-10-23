@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import BotaoCadastrar from './components/BotaoCadastrar/BotaoCadastrar';

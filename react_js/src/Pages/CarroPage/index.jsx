@@ -15,7 +15,11 @@ export default function DefeitoPage(props){
         preco:''
     });
 
-    const preencherEditar = (carro) => {setCarroEdit(carro)};
+    const preencherEditar = (carro) => {
+        setCarroEdit(carro);
+        alert(carro.modelo+':'+carro.ano+':'+carro.fabricante+':'+carro.preco);
+        
+    };
 
     useEffect(() =>{
 
@@ -118,7 +122,7 @@ export default function DefeitoPage(props){
 
     return(
         <>
-            <CarroCadastro cadastrar={cadastrarCarro} carroEdit={CarroEdit} updateCarro={updateCarro} />
+            <CarroCadastro cadastrar={cadastrarCarro} carroEdit={CarroEdit} updateCarro={updateCarro}  />
             <TabelaCarro excluir={excluirCarro} carros={Carros} preencherEditar={preencherEditar}/>
         </>
     )
