@@ -17,7 +17,6 @@ export default function DefeitoPage(props){
 
     const preencherEditar = (carro) => {
         setCarroEdit(carro);
-        alert(carro.modelo+':'+carro.ano+':'+carro.fabricante+':'+carro.preco);
         
     };
 
@@ -97,7 +96,7 @@ export default function DefeitoPage(props){
     const updateCarro = (modelo, ano, fabricante, preco, id) => {
         
         // Cadastra um Carro
-        axios.post(`http://127.0.0.1:8000/api/carros`, {
+        axios.put(`http://127.0.0.1:8000/api/carros/update`, {
             'headers': {
             'Accept': 'Application/json'
             },

@@ -18,9 +18,9 @@ class DefeitosController extends Controller
                 'id_carro'  => $defeito->id_carro,
                 'id'        => $defeito->id,
                 'defeito'   => $defeito->defeito,
-                'modelo'    => $defeito->carro->modelo,
-                'ano'       => $defeito->carro->ano,
-                'fabricante'=> $defeito->carro->fabricante
+                'modelo'    => $defeito->carro->modelo,//!empty($defeito->carro->modelo) ? :'Carro excluido',
+                'ano'       => $defeito->carro->ano,//!empty($defeito->carro->ano) ? :'Carro excluido',
+                'fabricante'=> $defeito->carro->fabricante,//!empty($defeito->carro->fabricante) ? :'Carro excluido'
             ];
         }
         return response($data, 200);
@@ -77,9 +77,24 @@ class DefeitosController extends Controller
         if(Defeito::destroy($id))
 		{
             Defeito::destroy($id);
+            
             $defeitos = Defeito::all();
+            $data = [];
+            foreach($defeitos as $defeito){
 
-            return response($defeitos, 200);
+                $data[] = [
+
+                    'id_carro'  => $defeito->id_carro,
+                    'id'        => $defeito->id,
+                    'defeito'   => $defeito->defeito,
+                    'modelo'    => $defeito->carro->modelo,//!empty($defeito->carro->modelo) ? :'Carro excluido',
+                    'ano'       => $defeito->carro->ano,//!empty($defeito->carro->ano) ? :'Carro excluido',
+                    'fabricante'=> $defeito->carro->fabricante,//!empty($defeito->carro->fabricante) ? :'Carro excluido'
+                ];
+                
+            }
+
+            return response($data, 200);
 		
         }else{
 

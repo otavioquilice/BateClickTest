@@ -39,6 +39,8 @@ export default function DefeitoCadastro(props){
                 } value="Cadastrar" />
                 <input type="button" onClick={updateDefeito} value="Editar" />
             </form>
+            <br></br>
+            <br></br>
         </nav>
     );
 }

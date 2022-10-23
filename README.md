@@ -39,6 +39,8 @@ ReactJs
         Defeito/DefeitoCard - Row do Objeto dentro do gridview.
         Pages/DefeitoPage/index - Tela principal onde é inserido o comnponenet de formulário e gridview, é o arquivo onde está sendo usado as requisições via Axios com os metodos de CRUD.
 
+        No metodo editar não consegui deixar funcional devido a falta de tempo hábil disponivel, porém a api está fucnionando, o que não consegui deixar funcional foi a dinamicidade dos dados no mesmo formulário no reactJs. 
+
 Considerações ReactJs: Das três tecnologias, essa foi a que tive dificuldade devido a pouca pratica com a mesma, foi um desafio, pois o pouco que vi na academia não foi o suficiente, tive que estudar por um tempo para que pudesse desenvolver o teste.
 
 
