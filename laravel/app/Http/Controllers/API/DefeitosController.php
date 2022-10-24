@@ -63,12 +63,24 @@ class DefeitosController extends Controller
     
     public function update(Request $request){
 
-
-        $defeito    = Defeito::findOrFail($request->id_carro);
+        $defeito    = Defeito::findOrFail($request->id);
         $data       = $request->all();
         $defeito->update($data);
 
-        return response($defeito, 200);
+        $defeitos   = Defeito::all();
+        $data = [];
+        foreach($defeitos as $defeito){
+            $data[] = [
+
+                'id_carro'  => $defeito->id_carro,
+                'id'        => $defeito->id,
+                'defeito'   => $defeito->defeito,
+                'modelo'    => $defeito->carro->modelo,//!empty($defeito->carro->modelo) ? :'Carro excluido',
+                'ano'       => $defeito->carro->ano,//!empty($defeito->carro->ano) ? :'Carro excluido',
+                'fabricante'=> $defeito->carro->fabricante,//!empty($defeito->carro->fabricante) ? :'Carro excluido'
+            ];
+        }
+        return response($data, 200);
 
     }
 

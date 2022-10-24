@@ -20,6 +20,7 @@ export default function DefeitoCarro(props){
                         <DefeitoCard
                             excluir = {props.excluir}
                             defeito={defeito}
+                            preencherEditar={props.preencherEditar}
                         />
                     )
                     })

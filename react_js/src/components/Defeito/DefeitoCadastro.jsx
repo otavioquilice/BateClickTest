@@ -1,14 +1,8 @@
-import React, { useState } from 'react';
+import React, {  } from 'react';
 import "./defeitoCadastro.css"
 
 export default function DefeitoCadastro(props){
 
-    const [idCarro, setIdCarro] = useState('');
-    const [defeito, setDefeito] = useState('');
-    
-    const updateDefeito = () => {
-        alert('Função de atualizar')
-    }
 
     return (
         <nav className="defeitoCadastro">
@@ -16,28 +10,36 @@ export default function DefeitoCadastro(props){
             <form>
                 <label>
                     Carro:
-                    <select name="id_carro" onChange={(e) => {e.preventDefault(); setIdCarro(e.target.value)}}>
-                    <option value="" selected disabled hidden>Escolha um carro</option>
+                    <select name="id_carro" value={props.idCarro} onChange={(e) => {e.preventDefault(); props.setIdCarro(e.target.value)}}>
+                        <option value="" selected disabled hidden>Escolha um carro</option>
                         {
-                            props.carros?.map((carro) => {
+                            props.carros?.map((carro, props) => {
                                 return ( 
-                                    
-                                    <option value={carro.id}>{carro.modelo}/{carro.ano}/{carro.fabricante}</option>
+                                    <option value={carro.id} >
+                                        {carro.modelo}/{carro.ano}/{carro.fabricante}
+                                    </option>
                                 )
                             })
                         }
+                        {/* { props.id && <option value={props.idCarro} selected disabled hidden>Escolha um carro</option> } */}
                     </select>
                 </label>
                 <label>
                     Defeito:
-                    <input type="text" name="defeito" value={defeito} onChange={(e) => {setDefeito(e.target.value)}} />
+                    <input type="text" name="defeito" value={props.defeito} onChange={(e) => {props.setDefeito(e.target.value)}} />
                 </label>
+                <input type="hidden" name="id" value={props.id} onChange={(e) => {props.setId(props.id)}} />
+
                 <input type="button" onClick={(event) => {
                         event.preventDefault();
-                        props.cadastrar(idCarro, defeito)
+                        props.cadastrar(props.idCarro, props.defeito)
                     }
                 } value="Cadastrar" />
-                <input type="button" onClick={updateDefeito} value="Editar" />
+                <input type="button" onClick={(event) => {
+                        event.preventDefault();
+                        props.updateDefeito(props.id, props.idCarro, props.defeito)
+                    } 
+                } value="Confirmar Edição" />
             </form>
             <br></br>
             <br></br>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Carro;
+use App\Models\Defeito;
 
 class CarrosController extends Controller
 {
@@ -47,15 +48,21 @@ class CarrosController extends Controller
     
     public function update(Request $request){
 
-        $carro      = Carro::findOrFail($request->id_carro);
+        $carro      = Carro::findOrFail($request->id);
         $data       = $request->all();
         $carro->update($data);
+        $carros = Carro::all();
 
-        return response($carro, 200);
+        return response($carros, 200);
 
     }
 
     public function destroy($id){
+
+        $defeitos = Defeito::where('id_carro', $id);
+        if(!empty($defeitos) && $defeitos->count()){
+            return response($content = 'Não foi possivel excluir o carro, para isso, exclua o(s) defeito(s) primeiro!', $status = 401);
+        }
 
         if(Carro::destroy($id))
 		{

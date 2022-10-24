@@ -6,17 +6,21 @@ import { useEffect } from "react";
 
 export default function DefeitoPage(props){
 
+    const [modelo, setModelo] = useState('');
+    const [ano, setAno] = useState('');
+    const [fabricante, setFabricante] = useState('');
+    const [preco, setPreco] = useState('');
+    const [id, setId] = useState('');
+
     const [Carros, setAllCarros] = useState([]);
-    const [CarroEdit, setCarroEdit] = useState({
-        id:'',
-        modelo:'',
-        ano:'',
-        fabricante:'',
-        preco:''
-    });
 
     const preencherEditar = (carro) => {
-        setCarroEdit(carro);
+
+        setModelo(carro.modelo);
+        setAno(carro.ano);
+        setFabricante(carro.fabricante);
+        setPreco(carro.preco);
+        setId(carro.id);
         
     };
 
@@ -75,6 +79,30 @@ export default function DefeitoPage(props){
           });
     }
 
+    const updateCarro = (modelo, ano, fabricante, preco, id) => {
+        
+        // Cadastra um Carro
+        axios.put(`http://127.0.0.1:8000/api/carros/update`, {
+            'headers': {
+            'Accept': 'Application/json'
+            },
+            'modelo':modelo,
+            'ano':ano,
+            'fabricante':fabricante,
+            'preco':preco,
+            'id':id 
+        }).then((Carros) => {
+            setAllCarros(Carros.data);
+
+        }).catch(function (error) {
+            
+            if (error.response) {
+              console.log(error.response.data);
+              alert(error.response.data.message);
+            }
+          });
+    }
+    
     const excluirCarro = (id) => {
 
         // Cadastra um Carro
@@ -88,40 +116,15 @@ export default function DefeitoPage(props){
             
             if (error.response) {
               console.log(error.response.data);
-              alert(error.response.data.message);
+              alert(error.response.data);
             }
           });
     }
 
-    const updateCarro = (modelo, ano, fabricante, preco, id) => {
-        
-        // Cadastra um Carro
-        axios.put(`http://127.0.0.1:8000/api/carros/update`, {
-            'headers': {
-            'Accept': 'Application/json'
-            },
-            'modelo':modelo,
-            'ano':ano,
-            'fabricante':fabricante,
-            'preco':preco,
-            'id':id 
-        }).then((cadastro) => {
-            setAllCarros([...Carros, cadastro.data])
-
-        }).catch(function (error) {
-            
-            if (error.response) {
-              console.log(error.response.data);
-              alert(error.response.data.message);
-            }
-          });
-    }
-
-    
 
     return(
         <>
-            <CarroCadastro cadastrar={cadastrarCarro} carroEdit={CarroEdit} updateCarro={updateCarro}  />
+            <CarroCadastro modelo={modelo} setModelo={setModelo} ano={ano} setAno={setAno}  preco={preco} setPreco={setPreco} fabricante={fabricante} setFabricante={setFabricante}  id={id} setid={setId}  cadastrar={cadastrarCarro} updateCarro={updateCarro}  />
             <TabelaCarro excluir={excluirCarro} carros={Carros} preencherEditar={preencherEditar}/>
         </>
     )

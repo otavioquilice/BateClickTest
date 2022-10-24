@@ -8,6 +8,18 @@ export default function DefeitoPage(props){
 
     const [Defeitos, setAllDefeitos] = useState([]);
     const [Carros, setAllCarros] = useState([]);
+
+    const [idCarro, setIdCarro] = useState('');
+    const [defeito, setDefeito] = useState('');
+    const [id, setId] = useState('');
+
+    const preencherEditar = (defeito) => {
+
+        setIdCarro(defeito.id_carro);
+        setDefeito(defeito.defeito);
+        setId(defeito.id);
+        
+    };
     
 
     useEffect(() =>{
@@ -65,6 +77,28 @@ export default function DefeitoPage(props){
           });
     }
 
+    const updateDefeito = (id, id_carro, defeito) => {
+        
+        // Cadastra um Carro
+        axios.put(`http://127.0.0.1:8000/api/defeitos/update`, {
+            'headers': {
+            'Accept': 'Application/json'
+            },
+            'id_carro':id_carro,
+            'defeito':defeito,
+            'id':id 
+        }).then((Defeitos) => {
+            setAllDefeitos(Defeitos.data);
+
+        }).catch(function (error) {
+            
+            if (error.response) {
+              console.log(error.response.data);
+              alert(error.response.data.message);
+            }
+          });
+    }
+
     const excluirDefeito = (id) => {
 
         // Cadastra um Carro
@@ -85,8 +119,8 @@ export default function DefeitoPage(props){
 
     return(
         <>
-            <DefeitoCadastro  carros={Carros} cadastrar={cadastrarDefeito} />
-            <TabelaDefeito excluir={excluirDefeito} defeitos={Defeitos}/>
+            <DefeitoCadastro  carros={Carros} cadastrar={cadastrarDefeito} idCarro={idCarro} setIdCarro={setIdCarro} defeito={defeito} setDefeito={setDefeito} id={id} setId={setId} updateDefeito={updateDefeito}/>
+            <TabelaDefeito excluir={excluirDefeito} defeitos={Defeitos} preencherEditar={preencherEditar}/>
         </>
     )
 

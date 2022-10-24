@@ -1,13 +1,7 @@
-import React, { useState } from 'react';
+import React, { } from 'react';
 import "./carroCadastro.css"
 
 export default function CarroCadastro(props){
-
-    const [modelo, setModelo] = useState('');
-    const [ano, setAno] = useState('');
-    const [fabricante, setFabricante] = useState('');
-    const [preco, setPreco] = useState('');
-    const [id, setid] = useState('');
 
     return (
         <nav className="carroCadastro">
@@ -15,45 +9,37 @@ export default function CarroCadastro(props){
             <form>
                 <label>
                     Modelo:
-                    {!props.carroEdit.modelo && <input type="text" name="modelo" value={modelo} onChange={(e) => {setModelo(e.target.value)}} />}
-                    {props.carroEdit.modelo && <input type="text" name="modelo" value={props.carroEdit.modelo} onClick={(e) => props.carroEdit.modelo = false} onChange={(e) => {setModelo(e.target.value)}} />}
-
+                    <input type="text" name="modelo" value={props.modelo} onChange={(e) => {props.setModelo(e.target.value)}} />
                 </label>
                 <label>
                     Ano:
-                    {!props.carroEdit.ano && <input type="text" name="ano" value={ano} onChange={(e) => {setAno(e.target.value)}}/>}
-                    {props.carroEdit.ano && <input type="text" name="ano" value={props.carroEdit.ano} onClick={(e) => props.carroEdit.ano = false} onChange={(e) => {setAno(e.target.value)}}/>}
-
+                    <input type="number" min="1900" max="2099" step="1" name="ano" value={props.ano} onChange={(e) => {props.setAno(e.target.value)}}/>
                 </label>
                 <label>
                     Fabricante:
-                    {!props.carroEdit.fabricante && <input type="text" name="fabricante" value={fabricante} onChange={(e) => {setFabricante(e.target.value)}} />}
-                    {props.carroEdit.fabricante && <input type="text" name="fabricante" value={props.carroEdit.fabricante} onClick={(e) => props.carroEdit.fabricante = false} onChange={(e) => {setFabricante(e.target.value)}} />}
-
+                    <input type="text" name="fabricante" value={props.fabricante} onChange={(e) => {props.setFabricante(e.target.value)}} />
                 </label>
 
                 <label>
                     Preço:
-                    {!props.carroEdit.preco && <input type="float" name="preco" value={preco} onChange={(e) => {setPreco(e.target.value)}} />}
-                    {props.carroEdit.preco && <input type="float" name="preco" value={props.carroEdit.preco} onClick={(e) => props.carroEdit.preco = false} onChange={(e) => {setPreco(e.target.value)}} />}
-
+                    <input type="float" name="preco" value={props.preco} onChange={(e) => {props.setPreco(e.target.value)}} />
                 </label>
                 
-                <input type="hidden" name="id" value={props.carroEdit.id} onChange={(e) => {setid(e.target.value)}} />
-
+                <input type="hidden" name="id" value={props.id} onChange={(e) => {props.setid(props.id)}} />
                 <input type="button" onClick={(event) => {
                         event.preventDefault();
-                        props.cadastrar(modelo, ano, fabricante, preco)
+                        props.cadastrar(props.modelo, props.ano, props.fabricante, props.preco)
                     }
                 } value="Cadastrar" />
                 <input type="button" onClick={(event) => {
                         event.preventDefault();
-                        props.updateCarro(modelo, ano, fabricante, preco, id)
+                        props.updateCarro(props.modelo, props.ano, props.fabricante, props.preco, props.id)
                     } 
                 } value="Confirmar Edição" />
             </form>
             <br></br>
             <br></br>
+            
         </nav>
     );
 }
