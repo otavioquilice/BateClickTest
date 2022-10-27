@@ -5,7 +5,7 @@ use bate_click;
 CREATE TABLE IF NOT EXISTS carros (
     id SMALLINT PRIMARY KEY AUTO_INCREMENT,
     uuid VARCHAR(255) NULL,
-	ano DATE NOT NULL,
+	ano Varchar(50 NOT NULL,
 	modelo Varchar(50) NOT NULL,
 	fabricante Varchar(50) NOT NULL,
 	preco DECIMAL (10, 2) NOT NULL,
